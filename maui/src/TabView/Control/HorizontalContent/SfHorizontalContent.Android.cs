@@ -25,7 +25,7 @@ namespace Syncfusion.Maui.Toolkit.TabView
 
 		// Constants for touch movement thresholds
 		const double VerticalScrollThreshold = 5;
-		const double HorizontalScrollThreshold = 30;
+		const double HorizontalScrollThreshold = 15;
 
 		#endregion
 
@@ -51,13 +51,13 @@ namespace Syncfusion.Maui.Toolkit.TabView
 							_downX = motionEvent.GetX();
 							_downY = motionEvent.GetY();
 							_initialPoint = currenTouchPoint;
-							_shouldProcessTouchForSwipe = false; // Reset flag on new touch
+							_shouldProcessTouchForSwipe = false;
 							return false;
 						}
 					case MotionEventActions.Up:
 						{
 							_initialPoint = new Point(0, 0);
-							_shouldProcessTouchForSwipe = false; // Reset flag on touch up
+							_shouldProcessTouchForSwipe = false;
 							break;
 						}
 					case MotionEventActions.Move:
@@ -123,7 +123,7 @@ namespace Syncfusion.Maui.Toolkit.TabView
 					{
 						// Handle the release action
 						OnHandleTouchInteraction(PointerActions.Released, e.TouchPoint);
-						_shouldProcessTouchForSwipe = false; // Reset after release
+						_shouldProcessTouchForSwipe = false;
 						break;
 					}
 			}
