@@ -78,7 +78,7 @@ namespace Syncfusion.Maui.Toolkit.TabView
 							// This ensures taps with slight finger movement are not treated as swipes
 							if (!_isPressed && horizontalDelta > HorizontalScrollThreshold && horizontalDelta > verticalDelta)
 							{
-								_shouldProcessTouchForSwipe = true; // Mark that we should process this as a swipe
+								_shouldProcessTouchForSwipe = true;
 								OnHandleTouchInteraction(PointerActions.Pressed, _initialPoint);
 								return true;
 							}
@@ -96,8 +96,6 @@ namespace Syncfusion.Maui.Toolkit.TabView
 		/// <param name="e">Pointer event arguments containing touch action and point.</param>
 		void ITouchListener.OnTouch(PointerEventArgs e)
 		{
-			// Only process touch for swiping if we've determined it's a swipe gesture
-			// This prevents intercepting taps with slight finger movement
 			if (!_shouldProcessTouchForSwipe)
 			{
 				return;
