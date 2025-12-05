@@ -19,7 +19,8 @@ namespace Syncfusion.Maui.Toolkit.TabView
 		double _moveX;
 		double _moveY;
 
-		// Flag to determine if touch should be processed for swiping
+		// Flag set to true when horizontal movement exceeds threshold and is greater than vertical movement,
+		// indicating this should be processed as a swipe gesture rather than a tap
 		bool _shouldProcessTouchForSwipe;
 
 		// Constants for touch movement thresholds
