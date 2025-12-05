@@ -21,7 +21,7 @@ namespace Syncfusion.Maui.Toolkit.TabView
 
 		// Constants for touch movement thresholds
 		const double VerticalScrollThreshold = 5;
-		const double HorizontalScrollThreshold = 15;
+		const double HorizontalScrollThreshold = 30;
 
 		#endregion
 
@@ -59,14 +59,18 @@ namespace Syncfusion.Maui.Toolkit.TabView
 							_moveX = motionEvent.GetX();
 							_moveY = motionEvent.GetY();
 
-							// Check for vertical scrolling threshold
-							if (Math.Abs(_downY - _moveY) > VerticalScrollThreshold && Math.Abs(_downX - _moveX) < HorizontalScrollThreshold)
+							double horizontalDelta = Math.Abs(_downX - _moveX);
+							double verticalDelta = Math.Abs(_downY - _moveY);
+
+							// Check for vertical scrolling threshold - don't intercept vertical scrolls
+							if (verticalDelta > VerticalScrollThreshold && horizontalDelta < HorizontalScrollThreshold)
 							{
 								return false;
 							}
 
-							// Handle initial touch interaction
-							if (!_isPressed && Math.Abs(_downY - _moveY) != 0 && Math.Abs(_downX - _moveX) != 0)
+							// Only intercept if horizontal movement exceeds threshold and is greater than vertical movement
+							// This ensures taps with slight finger movement are not treated as swipes
+							if (!_isPressed && horizontalDelta > HorizontalScrollThreshold && horizontalDelta > verticalDelta)
 							{
 								OnHandleTouchInteraction(PointerActions.Pressed, _initialPoint);
 								return true;
